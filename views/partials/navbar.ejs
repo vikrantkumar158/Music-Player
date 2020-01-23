@@ -1,0 +1,32 @@
+<style>
+    #div1{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        background-color: black;
+        height:65px;
+        color: white;
+        line-height: 65px;
+        position: fixed;
+        top: 0;
+        z-index: 20;
+    }
+</style>
+<div id='div1'>
+    <img src='/pic1.png' height="65" width="65" style="position:fixed;top:0;" /> 
+    <font class="hidden-xs" face="Impact" size="10" style="position:fixed;margin-left: 80px;">MUSIC SOFT</font>
+    <div style="margin-left: auto;">
+        <button type="button" id="loginbtn" class="btn btn-success" style="margin-right: 20px;">Login</button>
+        <button type="button" id="signupbtn" class="btn btn-danger" style="margin-right: 20px;">SignUp</button>
+    </div>
+</div>
+<script>
+    var loginbtn=document.getElementById("loginbtn");
+    loginbtn.onclick=()=>{
+        document.getElementById('id01').style.display="block";	
+    }
+    var signupbtn=document.getElementById("signupbtn");
+    signupbtn.onclick=()=>{
+        document.getElementById('id02').style.display="block";
+    }
+</script>

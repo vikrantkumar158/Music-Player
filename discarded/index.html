@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Music Soft</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<style>
+			html{
+				height:100%;
+				width: 100%;
+				overflow-x: hidden;
+			}
+			body{
+				margin: 0px;
+				padding: 0px;
+				background-color: rgb(250,125,125);
+				min-height:100%;
+				overflow-x: hidden;
+				-ms-overflow-style: none;
+			}
+			body::-webkit-scrollbar {
+				display: none;
+			}
+			#div1{
+				display: flex;
+				align-items: center;
+				width: 100%;
+				background-color: black;
+				height:65px;
+				color: white;
+				line-height: 65px;
+				position: fixed;
+				top: 0;
+				z-index: 20;
+			}
+			h1{
+				font-family: 'Sofia';
+				font-size: 22px;
+			}
+			.button1{
+				height: 40px;
+				border-radius: 4px;
+				color: white;
+				border:0;
+				font-size:16px;
+			}
+			.row{
+				margin: 0px 10px;
+			}
+			form {
+  				border: 3px solid #f1f1f1;
+			}
+			input[type=text], input[type=password] {
+				width: 100%;
+				padding: 12px 20px;
+				margin: 8px 0;
+				display: inline-block;
+				border: 1px solid #ccc;
+				box-sizing: border-box;
+			}
+			button:hover {
+  				opacity: 0.8;
+			}
+			.imgcontainer {
+  				text-align: center;
+  				margin: 24px 0 12px 0;
+  				position: relative;
+			}
+			img.avatar {
+  				width: 40%;
+  				border-radius: 50%;
+			}
+			.containmain {
+				padding: 16px;
+			}
+			.containment {
+				display:flex;
+				align-items: center;
+  				padding: 16px;
+			}
+			span.psw {
+				margin-left: auto;
+  				margin-right: 20px;
+			}
+			.modal {
+				display: none;
+				position: fixed;
+				z-index: 21;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+				background-color: rgb(0,0,0);
+				background-color: rgba(0,0,0,0.4);
+				padding-top: 60px;
+			}
+			.modal-content {
+				background-color: #fefefe; 
+				border: 1px solid #888;
+				padding: 0;
+			}
+			.close {
+				position: absolute;
+				right: 25px;
+				top: 0;
+				color: #000;
+				font-size: 35px;
+				font-weight: bold;
+				}
+			.close:hover,.close:focus {
+				color: red;
+				cursor: pointer;
+			}
+			.animate {
+				-webkit-animation: animatezoom 0.6s;
+				animation: animatezoom 0.6s
+			}
+			@-webkit-keyframes animatezoom {
+				from {-webkit-transform: scale(0)}
+				to {-webkit-transform: scale(1)}
+			}
+			@keyframes animatezoom {
+				from {transform: scale(0)}
+				to {transform: scale(1)}
+			}
+			.or-seperator {
+				text-align: center;
+				border-top: 1px solid #ccc;
+			}
+			.or-seperator i {
+				padding: 0 10px;
+				background: #f7f7f7;
+				position: relative;
+				top: -11px;
+				z-index: 1;
+			}
+			.social-btn .btn {
+				display: flex;
+				justify-content: center;
+				margin: 10px 0;
+				font-size: 15px; 
+				line-height: 24px;       
+			}
+			.social-btn .btn i {
+				float: left;
+				margin: 4px 15px  0 5px;
+				min-width: 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='div1'>
+			<img src='/pic1.png' height="65" width="65" style="position:fixed;top:0;" /> 
+			<font class="hidden-xs" face="Impact" size="10" style="position:fixed;margin-left: 80px;">MUSIC SOFT</font>
+			<div style="margin-left: auto;">
+				<button type="button" id="loginbtn" class="btn btn-success" style="margin-right: 20px;">Login</button>
+				<button type="button" id="signupbtn" class="btn btn-danger" style="margin-right: 20px;">SignUp</button>
+			</div>
+		</div>
+		<div style="position: absolute;top:65px;overflow-x: hidden;">
+			<div class="container" style="width: 100%;padding: 0;margin-bottom: 20px;">
+	  			<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	    			<ol class="carousel-indicators">
+				     	<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+	      				<li data-target="#myCarousel" data-slide-to="1"></li>
+	      				<li data-target="#myCarousel" data-slide-to="2"></li>
+	    			</ol>
+		    		<div class="carousel-inner">
+		      			<div class="item active">
+		        			<img src="/pic3.jpg" alt="Music" style="width:100%;">
+		      			</div>
+		      			<div class="item">
+		        			<img src="/pic4.jpg" alt="Music" style="width:100%;">
+		      			</div>
+		      			<div class="item">
+		        			<img src="/pic2.jpg" alt="New york" style="width:100%;">
+		      			</div>
+		    		</div>
+		    		<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+		      			<span class="glyphicon glyphicon-chevron-left"></span>
+		      			<span class="sr-only">Previous</span>
+		    		</a>
+		    		<a class="right carousel-control" href="#myCarousel" data-slide="next">
+		      			<span class="glyphicon glyphicon-chevron-right"></span>
+		      			<span class="sr-only">Next</span>
+		    		</a>
+	  			</div>
+			</div>
+			<div class="row">
+	  			<div class="image col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-4">
+	    			<div class="thumbnail">
+	      				<a href="/rock">
+	        				<img src="/pic5.jpg" alt="Rock" style="width:100%;border-radius: 50%;align:center;">
+	        				<div class="caption" style="text-align: center;">
+	          					<h1>ROCK</h1>
+	        				</div>
+	      				</a>
+	    			</div>
+	  			</div>
+	 			<div class="image col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-4">
+	    			<div class="thumbnail">
+	      				<a href="/classical">
+	        				<img src="/pic7.jpg" alt="Classical" style="width:100%;border-radius: 50%;">
+	        				<div class="caption" style="text-align: center;">
+	          					<h1>CLASSICAL</h1>
+	        				</div>
+	      				</a>
+	    			</div>
+	  			</div>
+	  			<div class="image col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-4">
+	    			<div class="thumbnail">
+	      				<a href="/pop">
+	        				<img src="/pic6.jpg" alt="Pop" style="width:100%;border-radius: 50%;">
+	        				<div class="caption" style="text-align: center;">
+	          					<h1>POP</h1>
+	        				</div>
+	      				</a>
+	    			</div>
+				  </div>
+			</div>
+			<div class="row">
+	  			<div class="image col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-4">
+	    			<div class="thumbnail">
+	      				<a href="/party">
+	        				<img src="/pic8.jpg" alt="Pop" style="width:100%;border-radius: 50%;">
+	        				<div class="caption" style="text-align: center;">
+	          					<h1>PARTY</h1>
+	        				</div>
+	      				</a>
+	    			</div>
+	  			</div>
+	  			<div class="image col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-4 ">
+	    			<div class="thumbnail">
+	      				<a href="/retro">
+	        				<img src="/pic9.jpg" alt="Pop" style="width:100%;border-radius: 50%;">
+	        				<div class="caption" style="text-align: center;">
+	          					<h1>RETRO</h1>
+	        				</div>
+	      				</a>
+	    			</div>
+	  			</div>
+			</div>
+			<div class="row" style="background-color:#404040;padding: 0;margin: 0;height: 30vh">
+				<div class="col-xs-8 col-sm-10" style="padding: 0;">
+					<img src="/pic10.png" style="width: 100%;height: 15vh;">
+					<img src="/pic11.png" style="width: 100%;height: 15vh;">
+				</div>
+				<div class="col-xs-4 col-sm-2" style="padding: 0;">
+					<img src="/pic1.png" style="width: 100%;height: 30vh;">
+				</div>
+			</div>
+		</div>
+		<div id="id01" class="modal">
+			<form class="modal-content animate col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6" action="/action_page.php">
+				<div class="imgcontainer">
+					<span onclick="document.getElementById('id01').style.display='none'"class="close" title="Close Modal">&times;</span>
+					<img src="img_avatar2.png" alt="Avatar" class="avatar">
+			  	</div>
+			  	<div class="containmain">
+					<label for="uname"><b>Username</b></label>
+					<input type="text" placeholder="Enter Username" name="uname" required>
+					<label for="psw"><b>Password</b></label>
+					<input type="password" placeholder="Enter Password" name="psw" required>	  
+					<button type="submit" class="btn">Login</button>
+					<label style="float: right;">
+				  		<input type="checkbox" checked="checked" name="remember"> Remember me
+					</label>
+				</div>
+				<div style="padding: 0px 16px;">
+					<div class="or-seperator"><i>OR</i></div>
+					<div class="text-center social-btn">
+						<a href="#" class="btn btn-primary btn-block"><i class="fa fa-facebook"></i> Sign in with&nbsp;<b>Facebook</b></a>
+						<a href="#" class="btn btn-danger btn-block"><i class="fa fa-google"></i> Sign in with&nbsp;<b>Google</b></a>
+					</div>
+				</div>
+			  	<div class="containment" style="background-color:#f1f1f1">
+					<button type="button" onclick="document.getElementById('id01').style.display='none'" class="btn btn-danger">Cancel</button>
+					<span class="psw">Forgot <a href="#">password?</a></span>
+			  	</div>
+			</form>
+		</div>
+	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script>
+		loginbtn=document.getElementById("loginbtn");
+		loginbtn.onclick=()=>{
+			document.getElementById('id01').style.display="block";	
+		}
+		var modal = document.getElementById('id01');
+		window.onclick = function(event) 
+		{
+  			if (event.target == modal) {
+    			modal.style.display = "none";
+  			}
+		}
+	</script>
+
+</html>
