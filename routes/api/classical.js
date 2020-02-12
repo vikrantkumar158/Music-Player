@@ -4,8 +4,8 @@ var path=require('path');
 
 router.use(express.static(path.join(__dirname,'.././public')));
 
-router.get("*",(req,res)=>{
-    res.send("Bye");
+router.get("/",(req,res)=>{
+    res.render("classical.ejs");
 });
 
 module.exports=router;

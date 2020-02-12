@@ -8,11 +8,13 @@ router.get("/",(req,res)=>{
     res.render("index.ejs");
 });
 
+router.use('/upload',require('./api/upload'));
 router.use('/classical',require('./api/classical'));
 router.use('/party',require('./api/party'));
 router.use('/pop',require('./api/pop'));
 router.use('/retro',require('./api/retro'));
 router.use('/rock',require('./api/rock'));
-router.use('/auth',require('.././middlewares/passport'));
+router.use('/auth',require('.././middlewares'));
+router.use('/',require('./api/index'));
 
 module.exports=router;
