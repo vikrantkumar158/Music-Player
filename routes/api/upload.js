@@ -8,10 +8,8 @@ var songInfo = require('../.././controllers/songInfo');
 
 router.post('/',(req,res)=>{
 	multer.upload(req,res,(err)=>{
-		console.log(req.file);
 		mm.parseFile(req.file.path)
 		.then(metadata=>{
-			console.log(util.inspect(metadata, {showHidden: false, depth: null}));
 			songInfo.saveSong(req.file.originalname,metadata.common,(err,data)=>{
 				if(err)
 					console.error(err.message);

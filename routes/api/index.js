@@ -5,7 +5,6 @@ var songInfo = require('../.././controllers/songInfo');
 
 router.get("/img/:id",(req,res)=>{
 	songInfo.getPicture(req.params.id,(err,data)=>{
-		console.log(data);
 		res.setHeader('Content-Type','image/jpeg');
 		res.send(data[0].picture.data);
 	});
