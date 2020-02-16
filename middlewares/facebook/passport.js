@@ -12,8 +12,8 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 passport.use(new FacebookStrategy({
-        clientID: "622582245183963",
-        clientSecret: "cefd992d7037d9640ba38f92e483c594",
+        clientID: process.env.Facebook_clientID,
+        clientSecret: process.env.Facebook_clientSecret,
         callbackURL: "https://localhost:8000/auth/facebook/callback",
         profileFields: ['id','emails','name']
     },function(accessToken, refreshToken, profile, cb) {

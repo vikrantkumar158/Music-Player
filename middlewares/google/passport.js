@@ -12,8 +12,8 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 passport.use(new GoogleStrategy({
-        clientID: "890716421881-muvu3am27891e525f3iii7bnqeo9otu7.apps.googleusercontent.com",
-        clientSecret: "dDGjZ4JdPMVVVRFc2VpnQvOP",
+        clientID: process.env.Google_clientID,
+        clientSecret: process.env.Google_clientSecret,
         callbackURL: "https://127.0.0.1:8000/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, cb) {
