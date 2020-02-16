@@ -40,9 +40,12 @@ var play = (elem)=>{
     }
     if(music==undefined||music!=elem||p==0)
     {
-        music = elem;
-        document.getElementById("sideimg").src=music.childNodes[1].childNodes[1].src;
-        $audio.src="./music/"+music.id; 
+        if(music!=elem||$seekbar.value==$seekbar.max)
+        {
+            music = elem;
+            document.getElementById("sideimg").src=music.childNodes[1].childNodes[1].src;
+            $audio.src="./music/"+music.id;
+        } 
         $audio.play();    
         p=1;
         $('.fx-drop-in').toggleClass("fa-play fa-pause");
@@ -69,4 +72,12 @@ $audio.onloadedmetadata = () => {
     convert($audio.duration);
 }
 $seekbar.onchange = () => $audio.currentTime = $seekbar.value
-$audio.ontimeupdate = () => $seekbar.value = $audio.currentTime
+$audio.ontimeupdate = () => 
+{
+    $seekbar.value = $audio.currentTime
+    if($seekbar.value == $seekbar.max)
+    {
+        $('.fx-drop-in').toggleClass("fa-play fa-pause");    
+        p=0;   
+    }
+}

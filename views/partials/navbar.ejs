@@ -1,7 +1,8 @@
 <style>
-    #div1{
+    #div1 {
         display: flex;
         align-items: center;
+        flex-direction: row;
         width: 100%;
         background-color: black;
         height:65px;
@@ -11,17 +12,25 @@
         top: 0;
         z-index: 20;
     }
-    button:focus{
+    button:focus {
         outline:none !important;
+    }
+    #div1>a {
+        color: inherit;
+        text-decoration: none;
+        display: flex;
+        flex-direction: row;   
     }
 </style>
 <div id='div1'>
-    <img src='/pic1.png' height="65" width="65" style="position:fixed;top:0;" /> 
+    <a href="/"><img src='/pic1.png' height="65" width="65" style="position:fixed;top:0;" /></a>
     <font class="hidden-xs" face="Impact" size="10" style="position:fixed;margin-left: 80px;">MUSIC SOFT</font>
-    <div style="margin-left: auto;">
-        <button type="button" id="loginbtn" class="btn btn-success" style="margin-right: 20px;">Login</button>
-        <button type="button" id="signupbtn" class="btn btn-danger" style="margin-right: 20px;">SignUp</button>
-    </div>
+    <% if(typeof data=='undefined'){ %>
+        <div style="margin-left: auto;">
+            <button type="button" id="loginbtn" class="btn btn-success" style="margin-right: 20px;">Login</button>
+            <button type="button" id="signupbtn" class="btn btn-danger" style="margin-right: 20px;">SignUp</button>
+        </div>
+    <% } %>
 </div>
 <script>
     var loginbtn=document.getElementById("loginbtn");

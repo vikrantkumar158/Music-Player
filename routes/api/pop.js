@@ -7,7 +7,7 @@ var songInfo = require('../.././controllers/songInfo');
 router.use(express.static(path.join(__dirname,'.././public')));
 
 router.get("/",(req,res)=>{
-	songInfo.find((err,data)=>{
+	songInfo.findByGenre("Pop",(err,data)=>{
 		res.render("pop.ejs",{data:data});
 	});
 });

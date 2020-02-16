@@ -42,3 +42,13 @@ exports.find = (cb)=>
 		cb(null,data);
 	})
 }
+
+exports.findByGenre = (genre,cb)=>
+{
+	songInfo.find({genre:genre},{picture:0})
+	.exec((err,data)=>{
+		if(err)
+			cb(err);
+		cb(null,data);
+	})
+}
