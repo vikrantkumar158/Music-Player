@@ -1,10 +1,12 @@
 var express=require('express');
 var path=require('path');
 var router=express.Router();
-var bcrypt=require('bcrypt');
 
 var passport=require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+var userInfo = require('../.././controllers/userInfo');
+var mail = require('.././nodemailer');
 
 router.use(passport.initialize());
 router.use(passport.session());
@@ -15,8 +17,44 @@ passport.use(new GoogleStrategy({
         callbackURL: "https://127.0.0.1:8000/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, cb) {
-        console.log(profile);
-        return cb(null,"Success");
+        userInfo.find(profile._json.email,(err,user)=>{
+            if(err)
+                cb(err);
+            if(user.length==0)
+            {
+                userInfo.saveUser(profile._json.name,profile._json.email,(err,data)=>{
+                    if(err)
+                        cb(err);
+                    else
+                    {
+                        if(data.email.localeCompare('vikrantkumar158@gmail.com')!=0)
+                        {
+                            var mailOptions = {
+                                from: 'vikrantkumar158@gmail.com',
+                                to: data.email,
+                                subject: 'Succesful registration on MusicSoft',
+                                text: 'Welcome to MusicSoft. Username: '+data.email+' Password: '+data.password
+                            };
+                            mail.sendMail(mailOptions,(err,info)=>{
+                                if(err)
+                                    cb(err);
+                                user.push(data);
+                                cb(null,user);
+                            });
+                        }
+                        else
+                        {
+                            user.push(data);
+                            cb(null,user);
+                        }
+                    }
+                });
+            }
+            else
+            {
+                return cb(null,user);
+            }
+        });
     }
 ));
 
@@ -35,7 +73,11 @@ router.get('/',passport.authenticate('google',{
     ]})
 );
 
-router.get('/callback',passport.authenticate('google',{failureRedirect:'/Rock'}),(req,res)=>{
+router.get('/callback',passport.authenticate('google',{failureRedirect:'/?error=nologin'}),(req,res)=>{
+    if(req.user.length!=0)
+    {
+        req.session.isLogin=1; 
+    }
     res.redirect('/');
 });
 

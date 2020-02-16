@@ -102,12 +102,12 @@
     }
 </style>
 <div id="id01" class="modal">
-    <form class="modal-content animate col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6" action="/action_page.php">
+    <form class="modal-content animate col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6" action="/login" method="POST">
         <div class="imgcontainer">
             <span onclick="document.getElementById('id01').style.display='none'"class="close" title="Close Modal">&times;</span>
             <img src="img_avatar2.png" alt="Avatar" class="avatar">
-          </div>
-          <div class="containmain">
+        </div>
+        <div class="containmain">
             <label for="uname"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="uname" required>
             <label for="psw"><b>Password</b></label>
@@ -138,4 +138,9 @@
             modal.style.display = "none";
         }
     }
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var error = url.searchParams.get("error");
+    if(error!=null)
+        loginbtn.click();
 </script>
