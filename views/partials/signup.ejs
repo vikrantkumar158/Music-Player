@@ -99,9 +99,15 @@
         margin: 4px 15px  0 5px;
         min-width: 15px;
     }
+    .verify {
+
+    }
+    .hidden {
+        display: none;
+    }
 </style>
 <div id="id02" class="modal">
-    <form class="modal-content animate col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6" action="/action_page.php">
+    <form class="modal-content animate col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6" action="/signup" method="POST">
         <div class="imgcontainer">
             <span onclick="document.getElementById('id02').style.display='none'"class="close" title="Close Modal">&times;</span>
             <img src="img_avatar2.png" alt="Avatar" class="avatar">
@@ -110,12 +116,17 @@
             <label for="fullname"><b>Name</b></label>
             <input type="text" placeholder="Enter your fullname" name="fullname" required>
             <label for="uname"><b>Email</b></label>
-            <input type="email" placeholder="Enter Username" name="uname" required>
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>	  
-            <label for="rpsw"><b>Repeat Password</b></label>
-            <input type="password" placeholder="Enter Password Again" name="rpsw" required>
-            <button type="submit" class="btn">SignUp</button>
+            <input type="email" placeholder="Enter Username" name="uname" id="uname" required>
+            <div class="hidden otpdiv" style="display: flex;justify-content: center;align-items: center;">
+                <label for="psw"><b>OTP (Verify Email)</b></label>
+                <input type="text" placeholder="Enter OTP" name="psw" id="psw">
+            </div>
+            <div class="alert alert-warning hidden">
+                Wrong OTP entered    
+            </div>
+            <input type="button" class="btn" id="otp" onclick="send()" value="Send OTP">
+            <input type="button" class="btn" id="resendotp" onclick="resend()" value="Resend OTP" disabled>
+            <button type="submit" class="btn" id="signup" disabled>SignUp</button>
             <label style="float: right;">
                   <input type="checkbox" checked="checked" name="remember"> Remember me
             </label>
@@ -127,18 +138,81 @@
                 <a href="/auth/google" class="btn btn-danger btn-block"><i class="fa fa-google"></i> Sign Up with&nbsp;<b>Google</b></a>
             </div>
         </div>
-          <div class="containment" style="background-color:#f1f1f1">
+        <div class="containment" style="background-color:#f1f1f1">
             <button type="button" onclick="document.getElementById('id02').style.display='none'" class="btn btn-danger">Cancel</button>
             <span class="psw">Forgot <a href="#">password?</a></span>
-          </div>
+        </div>
     </form>
 </div>
 <script>
+    var hash="";
+    function ValidateEmail(mail) 
+    {
+        var mailFormat=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (mail.match(mailFormat))
+        {
+            return (true)
+        }
+        document.getElementById('uname').focus();
+        return (false)
+    }
     var modale = document.getElementById('id02');
     window.onclick = function(event) 
     {
         if (event.target == modale) {
             modale.style.display = "none";
+        }
+    }
+    var send = ()=>{
+        if(document.getElementById("otp").value=="Send OTP")
+        {
+            if(ValidateEmail(document.getElementById('uname').value))
+            {
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("POST","http://127.0.0.1:3000/api/send");
+                xhttp.setRequestHeader("Content-Type","application/json");
+                xhttp.send(JSON.stringify({email:document.getElementById('uname').value}));
+                xhttp.onload = ()=>{
+                    hash=xhttp.responseText;
+                    $(".otpdiv").toggleClass("hidden");
+                    document.getElementById("otp").value="Verify OTP";
+                    document.getElementById('uname').readOnly=true;
+                    document.getElementById('resendotp').disabled=false;
+                }
+            }
+        }
+        else
+            verify();
+    }
+    var resend = ()=>{
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST","http://127.0.0.1:3000/api/send");
+        xhttp.setRequestHeader("Content-Type","application/json");
+        xhttp.send(JSON.stringify({email:document.getElementById('uname').value}));
+        xhttp.onload = ()=>{
+            hash=xhttp.responseText;
+        }
+    }
+    var verify = ()=>{
+        var xhttp=new XMLHttpRequest();
+        xhttp.open("POST","http://127.0.0.1:3000/verify");
+        xhttp.setRequestHeader("Content-Type","application/json");
+        xhttp.send(JSON.stringify({hash:hash,otp:document.getElementById("psw").value}));
+        xhttp.onload = ()=>{
+            
+            if(xhttp.responseText=="Success")
+            {
+                $(".alert-warning").toggleClass("hidden");
+                document.getElementById("otp").disabled=true;
+                document.getElementById("otp").value="Verified";
+                document.getElementById("otp").classList.add("btn-success");
+                document.getElementById('resendotp').disabled=true;
+                document.getElementById('signup').disabled=false;
+            }
+            else
+            {
+                $(".alert-warning").toggleClass("hidden");
+            }
         }
     }
 </script>

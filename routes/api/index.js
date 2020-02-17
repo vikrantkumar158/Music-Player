@@ -5,6 +5,7 @@ var bcrypt = require('bcrypt');
 
 var songInfo = require('../.././controllers/songInfo');
 var userInfo = require('../.././controllers/userInfo');
+var mail = require('../.././middlewares/nodemailer');
 
 router.get("/img/:id",(req,res)=>{
 	songInfo.getPicture(req.params.id,(err,data)=>{
@@ -33,7 +34,24 @@ router.post("/login",(req,res)=>{
 });
 
 router.post("/signup",(req,res)=>{
-	
+	userInfo.saveUser(req.body.fullname,req.body.uname,(err,data)=>{
+		if(err)
+			console.error(err.message);
+		else
+		{
+			var mailOptions = {
+	            from: process.env.emailID,
+	            to: data.email,
+	            subject: 'Succesful registration on MusicSoft',
+	            html: '<h3>Welcome to MusicSoft.</h3><br><b>Username:</b> '+data.email+'<br><b>Password:</b> '+data.password
+	        };
+	        mail.sendMail(mailOptions,(err,info)=>{
+	            if(err)
+	                cb(err);
+	            res.redirect("/");
+	        });
+		}
+	})
 });
 
 module.exports = router;

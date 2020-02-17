@@ -27,13 +27,13 @@ passport.use(new FacebookStrategy({
                         cb(err);
                     else
                     {
-                        if(data.email.localeCompare('vikrantkumar158@gmail.com')!=0)
+                        if(data.email.localeCompare(process.env.emilID)!=0)
                         {
                             var mailOptions = {
-                                from: 'vikrantkumar158@gmail.com',
+                                from: process.env.emailID,
                                 to: data.email,
                                 subject: 'Succesful registration on MusicSoft',
-                                text: 'Welcome to MusicSoft. Username: '+data.email+' Password: '+data.password
+                                html: '<h3>Welcome to MusicSoft.</h3><br><b>Username:</b> '+data.email+'<br><b>Password:</b> '+data.password
                             };
                             mail.sendMail(mailOptions,(err,info)=>{
                                 if(err)
