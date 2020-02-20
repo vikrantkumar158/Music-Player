@@ -45,7 +45,7 @@ exports.find = (cb)=>
 
 exports.findByGenre = (genre,cb)=>
 {
-	songInfo.find({genre:genre},{picture:0})
+	songInfo.find({genre:{$regex: genre, $options: "$i"}},{picture:0})
 	.exec((err,data)=>{
 		if(err)
 			cb(err);

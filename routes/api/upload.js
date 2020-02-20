@@ -15,7 +15,7 @@ router.post('/',(req,res)=>{
 			songInfo.saveSong(req.file.originalname,metadata.common,(err,data)=>{
 				if(err)
 					console.error(err.message);
-				res.redirect('/rock');
+				res.redirect('back');
 			});
 		})
 		.catch(err=>{
