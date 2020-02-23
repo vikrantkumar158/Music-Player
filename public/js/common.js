@@ -66,15 +66,17 @@ var convert = (secs)=>{
     m=(m<10)?"0"+m:m;
     h=(h<10)?"0"+h:h;
     document.getElementById("duration").getElementsByTagName("b")[0].innerHTML=h+":"+m+":"+s;
+    document.getElementById("duration1").getElementsByTagName("b")[0].innerHTML=h+":"+m+":"+s;
 }
 $audio.onloadedmetadata = () => {
-    $seekbar.max = $audio.duration
+    $seekbar.max = $seekbar1.max = $audio.duration
     convert($audio.duration);
 }
 $seekbar.onchange = () => $audio.currentTime = $seekbar.value
+$seekbar1.onchange = () => $audio.currentTime = $seekbar1.value
 $audio.ontimeupdate = () => 
 {
-    $seekbar.value = $audio.currentTime
+    $seekbar.value = $seekbar1.value = $audio.currentTime
     if($seekbar.value == $seekbar.max)
     {
         $('.fx-drop-in').toggleClass("fa-play fa-pause");    
