@@ -169,7 +169,7 @@
             if(ValidateEmail(document.getElementById('uname').value))
             {
                 var xhttp = new XMLHttpRequest();
-                xhttp.open("POST","http://127.0.0.1:3000/api/send");
+                xhttp.open("POST","https://email-otp.herokuapp.com/api/send");
                 xhttp.setRequestHeader("Content-Type","application/json");
                 xhttp.send(JSON.stringify({email:document.getElementById('uname').value}));
                 xhttp.onload = ()=>{
@@ -186,7 +186,7 @@
     }
     var resend = ()=>{
         var xhttp = new XMLHttpRequest();
-        xhttp.open("POST","http://127.0.0.1:3000/api/send");
+        xhttp.open("POST","https://email-otp.herokuapp.com/api/send");
         xhttp.setRequestHeader("Content-Type","application/json");
         xhttp.send(JSON.stringify({email:document.getElementById('uname').value}));
         xhttp.onload = ()=>{
@@ -195,14 +195,13 @@
     }
     var verify = ()=>{
         var xhttp=new XMLHttpRequest();
-        xhttp.open("POST","http://127.0.0.1:3000/verify");
+        xhttp.open("POST","https://email-otp.herokuapp.com/verify");
         xhttp.setRequestHeader("Content-Type","application/json");
         xhttp.send(JSON.stringify({hash:hash,otp:document.getElementById("psw").value}));
         xhttp.onload = ()=>{
             
             if(xhttp.responseText=="Success")
             {
-                $(".alert-warning").toggleClass("hidden");
                 document.getElementById("otp").disabled=true;
                 document.getElementById("otp").value="Verified";
                 document.getElementById("otp").classList.add("btn-success");
@@ -212,6 +211,7 @@
             else
             {
                 $(".alert-warning").toggleClass("hidden");
+                setTimeout(()=>{$(".alert-warning").toggleClass("hidden")},3000);
             }
         }
     }

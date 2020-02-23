@@ -62,9 +62,5 @@
   },
   "devDependencies": {
     "https-localhost": "^4.4.1"
-  },
-  "bugs": {
-    "url": "https://github.com/vikrantkumar158/Music-Player/issues"
-  },
-  "homepage": "https://github.com/vikrantkumar158/Music-Player#readme"
+  }
 }
