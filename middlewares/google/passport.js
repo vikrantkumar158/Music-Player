@@ -14,7 +14,7 @@ router.use(passport.session());
 passport.use(new GoogleStrategy({
         clientID: process.env.Google_clientID,
         clientSecret: process.env.Google_clientSecret,
-        callbackURL: "https://127.0.0.1:8000/auth/google/callback"
+        callbackURL: "https://music-soft.herokuapp.com/auth/google/callback"
     },
     function(accessToken, refreshToken, profile, cb) {
         userInfo.find(profile._json.email,(err,user)=>{

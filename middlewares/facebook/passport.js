@@ -14,7 +14,7 @@ router.use(passport.session());
 passport.use(new FacebookStrategy({
         clientID: process.env.Facebook_clientID,
         clientSecret: process.env.Facebook_clientSecret,
-        callbackURL: "https://localhost:8000/auth/facebook/callback",
+        callbackURL: "https://music-soft.herokuapp.com/auth/facebook/callback",
         profileFields: ['id','emails','name']
     },function(accessToken, refreshToken, profile, cb) {
     	userInfo.find(profile._json.email,(err,user)=>{
