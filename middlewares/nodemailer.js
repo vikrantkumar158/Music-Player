@@ -3,8 +3,8 @@ var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
   	service: 'Yandex',
   	auth:{
-    	user: process.env.emailID,
-    	pass: process.env.password
+    	user: process.env.user,
+    	pass: process.env.pass
   	}
 });
 
