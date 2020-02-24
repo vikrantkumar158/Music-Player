@@ -30,7 +30,7 @@ passport.use(new GoogleStrategy({
                         if(data.email.localeCompare(process.env.emilID)!=0)
                         {
                             var mailOptions = {
-                                from: process.env.emilID,
+                                from: process.env.user,
                                 to: data.email,
                                 subject: 'Succesful registration on MusicSoft',
                                 html: '<h3>Welcome to MusicSoft.</h3><br><b>Username:</b> '+data.email+'<br><b>Password:</b> '+data.password
