@@ -145,7 +145,6 @@
     </form>
 </div>
 <script>
-    var hash="";
     function ValidateEmail(mail) 
     {
         var mailFormat=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -173,7 +172,6 @@
                 xhttp.setRequestHeader("Content-Type","application/json");
                 xhttp.send(JSON.stringify({email:document.getElementById('uname').value}));
                 xhttp.onload = ()=>{
-                    hash=xhttp.responseText;
                     $(".otpdiv").toggleClass("hidden");
                     document.getElementById("otp").value="Verify OTP";
                     document.getElementById('uname').readOnly=true;
@@ -195,9 +193,9 @@
     }
     var verify = ()=>{
         var xhttp=new XMLHttpRequest();
-        xhttp.open("POST","https://email-otp.herokuapp.com/verify");
+        xhttp.open("POST","https://email-otp.herokuapp.com/api/verify");
         xhttp.setRequestHeader("Content-Type","application/json");
-        xhttp.send(JSON.stringify({hash:hash,otp:document.getElementById("psw").value}));
+        xhttp.send(JSON.stringify({email:document.getElementById('uname').value,otp:document.getElementById("psw").value}));
         xhttp.onload = ()=>{
             
             if(xhttp.responseText=="Success")
