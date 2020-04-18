@@ -188,7 +188,6 @@
         xhttp.setRequestHeader("Content-Type","application/json");
         xhttp.send(JSON.stringify({email:document.getElementById('uname').value}));
         xhttp.onload = ()=>{
-            hash=xhttp.responseText;
         }
     }
     var verify = ()=>{
